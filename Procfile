@@ -1,1 +1,1 @@
-web: go-microservices
+web: bin/go-microservices
