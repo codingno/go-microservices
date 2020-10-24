@@ -11,6 +11,12 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
 	ph := handlers.NewProducts(l)
 
@@ -18,7 +24,7 @@ func main() {
 	sm.Handle("/", ph)
 
 	s := &http.Server{
-		Addr:         ":8080",
+		Addr:         ":" + port,
 		Handler:      sm,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  1 * time.Second,
